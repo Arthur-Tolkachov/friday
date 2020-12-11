@@ -1,0 +1,14 @@
+.checkbox {
+    cursor: pointer;
+}
+
+.spanClassName {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 14px;
+    line-height: 1;
+}
+.label {
+    display: flex;
+    align-items: center;
+}
