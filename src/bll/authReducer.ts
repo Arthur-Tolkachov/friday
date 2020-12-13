@@ -1,17 +1,21 @@
 import { authActions } from "./actions"
-import { SET_IS_LOGGED_IN } from "./constants"
+import {AppActionsType} from './store'
 
 const initialState = {
-    isLoggedIn: false
+    isLoggedIn: false,
+    isFetching: false,
 }
 
-type ActionsType = ReturnType<typeof authActions.setIsLoggedIn>
+type ActionsType = AppActionsType<typeof authActions>
 type InitialStateType = typeof initialState
 
 const authReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
-        case SET_IS_LOGGED_IN: {
+        case 'SET_IS_LOGGED_IN': {
             return {...state, isLoggedIn: action.isLoggedIn}
+        }
+        case 'SET_FETCHING': {
+            return {...state, isFetching: action.bool}
         }
         default: return state
     }

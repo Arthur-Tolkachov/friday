@@ -1,0 +1,29 @@
+.preloader {
+    display: block;
+    margin: 0 auto;
+    width: 35px;
+    height: 35px;
+    position: relative;
+}
+.preloader::after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    border-color: #6629be transparent #6629be transparent;
+    animation: preloader 1.2s linear infinite;
+    box-sizing: border-box;
+}
+@keyframes preloader {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

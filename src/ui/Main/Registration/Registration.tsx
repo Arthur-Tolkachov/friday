@@ -5,9 +5,11 @@ import AuthContainer from '../../common/AuthContainer/AuthContainer'
 import SuperInputText from '../../common/SuperInputText/SuperInputText'
 import SuperButton from '../../common/SuperButton/SuperButton'
 import {useFormik} from 'formik'
-import { authActions } from '../../../bll/actions'
 import {authThunks} from '../../../bll/thunks'
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
+import {AppStateType} from '../../../bll/store'
+import Preloader from '../../common/Preloader/Preloader'
+import {RegistrationDataType} from '../../../utils/types/registration-types';
 
 type FormikErrorType = {
     email?: string
@@ -18,6 +20,8 @@ type FormikErrorType = {
 
 const Registration:React.FC = () => {
     const dispatch = useDispatch()
+    const isFetching = useSelector<AppStateType, boolean>(state => state.auth.isFetching)
+
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -51,7 +55,7 @@ const Registration:React.FC = () => {
             return errors;
         },
         onSubmit: values => {
-            const data = {
+            const data:RegistrationDataType = {
                 email: values.email,
                 password: values.password,
             }
@@ -83,7 +87,11 @@ const Registration:React.FC = () => {
                                         error={formik.touched.validatePassword && formik.errors.validatePassword ? formik.errors.validatePassword : null}
                                         {...formik.getFieldProps("validatePassword")} />
 
-                        <SuperButton className={s.btn}>Sign up</SuperButton>
+                        {isFetching
+                            ? <Preloader style={{marginTop: "20px"}}/>
+                            : <SuperButton className={s.btn}>Sign up</SuperButton>
+                        }
+
                     </form>
                 </div>
             </AuthContainer>
