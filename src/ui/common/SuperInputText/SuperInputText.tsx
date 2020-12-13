@@ -9,13 +9,12 @@ type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElem
 type SuperInputTextPropsType = DefaultInputPropsType & { // и + ещё пропсы которых нет в стандартном инпуте
     onChangeText?: (value: string) => void
     onEnter?: () => void
-    error?: string
+    error?: string | null
     spanClassName?: string
 };
 
 const SuperInputText: React.FC<SuperInputTextPropsType> = (
     {
-        type, // достаём и игнорируем чтоб нельзя было задать другой тип инпута
         onChange, onChangeText,
         onKeyPress, onEnter,
         error,

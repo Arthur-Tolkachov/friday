@@ -10,7 +10,7 @@ import PageNotFound from "./Main/PageNotFound/PageNotFound";
 import Test from "./Main/Test/Test";
 
 export const PATH = {
-    AUTH: "/authorisation",
+    AUTH: "/authorization",
     REG: "/registration",
     MAIN: "/main",
     PROFILE: "/profile",
