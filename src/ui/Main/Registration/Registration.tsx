@@ -4,7 +4,10 @@ import s from './Registration.module.css'
 import AuthContainer from '../../common/AuthContainer/AuthContainer'
 import SuperInputText from '../../common/SuperInputText/SuperInputText'
 import SuperButton from '../../common/SuperButton/SuperButton'
-import {useFormik} from "formik";
+import {useFormik} from 'formik'
+import { authActions } from '../../../bll/actions'
+import {authThunks} from '../../../bll/thunks'
+import {useDispatch} from 'react-redux'
 
 type FormikErrorType = {
     email?: string
@@ -14,6 +17,7 @@ type FormikErrorType = {
 
 
 const Registration:React.FC = () => {
+    const dispatch = useDispatch()
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -31,8 +35,8 @@ const Registration:React.FC = () => {
 
             if (!values.password) {
                 errors.password = 'required field';
-            } else if (values.password.length < 4) {
-                errors.password = 'must be more than 3 characters';
+            } else if (values.password.length < 7) {
+                errors.password = 'must be more than 6 characters';
             }
 
             if (!values.validatePassword) {
@@ -40,14 +44,18 @@ const Registration:React.FC = () => {
             } else if (values.password !== values.validatePassword) {
                 errors.validatePassword = 'passwords are different';
                 errors.password = 'passwords are different';
-            } else if (values.validatePassword.length < 4) {
-                errors.validatePassword = 'must be more than 3 characters';
+            } else if (values.validatePassword.length < 7) {
+                errors.validatePassword = 'must be more than 6 characters';
             }
 
             return errors;
         },
         onSubmit: values => {
-            console.log(values)
+            const data = {
+                email: values.email,
+                password: values.password,
+            }
+            dispatch(authThunks.setRegistrationData(data))
         },
     });
 

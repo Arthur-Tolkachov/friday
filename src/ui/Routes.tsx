@@ -2,7 +2,7 @@ import {Route, Switch} from "react-router-dom";
 import React from "react";
 import Main from "./Main/Main";
 import Authorization from "./Main/Authorization/Authorization";
-import Registration from "./Main/Redistration/Registration";
+import Registration from "./Main/Registration/Registration";
 import Profile from "./Main/Profile/Profile";
 import PasswordRecover from "./Main/PasswordRecover/PasswordRecover";
 import EnterNewPassword from "./Main/EnterNewPassword/EnterNewPassword";
