@@ -35,8 +35,8 @@ const Registration:React.FC = () => {
 
             if (!values.password) {
                 errors.password = 'required field';
-            } else if (values.password.length < 7) {
-                errors.password = 'must be more than 6 characters';
+            } else if (values.password.length < 8) {
+                errors.password = 'must be more than 7 characters';
             }
 
             if (!values.validatePassword) {
@@ -44,8 +44,8 @@ const Registration:React.FC = () => {
             } else if (values.password !== values.validatePassword) {
                 errors.validatePassword = 'passwords are different';
                 errors.password = 'passwords are different';
-            } else if (values.validatePassword.length < 7) {
-                errors.validatePassword = 'must be more than 6 characters';
+            } else if (values.validatePassword.length < 8) {
+                errors.validatePassword = 'must be more than 7 characters';
             }
 
             return errors;
