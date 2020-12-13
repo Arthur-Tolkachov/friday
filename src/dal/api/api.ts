@@ -12,6 +12,9 @@ export const authAPI = {
         return instance.post<LoginAPIType>(`auth/login`, {email, password, rememberMe})
             .then(res => res.data)
     },
+    registration(data:any) {
+        return instance.post('auth/register', data)
+    }
 }
 
 type LoginAPIType = {
