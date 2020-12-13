@@ -6,6 +6,11 @@ import SuperButton from '../../common/SuperButton/SuperButton'
 import AuthContainer from '../../common/AuthContainer/AuthContainer'
 import Title from '../../common/Title/Title'
 import SuperCheckbox from '../../common/SuperCheckbox/SuperCheckbox'
+import {useDispatch, useSelector} from 'react-redux'
+import {authThunks} from '../../../bll/thunks'
+import {AppStateType} from '../../../bll/store'
+import { PATH } from '../../Routes'
+import { Redirect } from 'react-router-dom'
 
 type FormikErrorType = {
     email?: string
@@ -14,6 +19,9 @@ type FormikErrorType = {
 }
 
 const Authorization: React.FC = () => {
+    const dispatch = useDispatch()
+    const isLoggedIn = useSelector<AppStateType, boolean>(state => state.auth.isLoggedIn)
+
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -36,9 +44,14 @@ const Authorization: React.FC = () => {
             return errors
         },
         onSubmit: values => {
-            console.log(values)
+            let {email, password, rememberMe} = values
+            dispatch(authThunks.login(email, password, rememberMe))
         },
     })
+
+    if (isLoggedIn) {
+        return <Redirect to={PATH.PROFILE}/>
+    }
 
     return (
         <div>

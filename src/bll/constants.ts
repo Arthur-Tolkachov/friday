@@ -1,2 +1,1 @@
-export const SET_REGISTRATION_DATA = "registration/SET_REGISTRATION_DATA"
-// это пример, чтобы файл сохранить когда напишешь свою константу, удали эту
+export const SET_IS_LOGGED_IN = "login/SET_IS_LOGGED_IN";
