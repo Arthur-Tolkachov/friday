@@ -3,10 +3,17 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './ui/App';
 import reportWebVitals from './reportWebVitals';
+import {HashRouter} from 'react-router-dom';
+import {store} from './bll/store';
+import {Provider} from 'react-redux';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+      <HashRouter basename="/friday">
+          <Provider store={store}>
+              <App />
+          </Provider>
+      </HashRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

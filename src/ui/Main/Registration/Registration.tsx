@@ -10,6 +10,9 @@ import {useDispatch, useSelector} from 'react-redux'
 import {AppStateType} from '../../../bll/store'
 import Preloader from '../../common/Preloader/Preloader'
 import {RegistrationDataType} from '../../../utils/types/registration-types';
+import { NavLink } from 'react-router-dom'
+import SuperButtonLink from '../../common/SuperButtonLink/SuperButtonLink';
+import {PATH} from '../../Routes';
 
 type FormikErrorType = {
     email?: string
@@ -91,7 +94,7 @@ const Registration:React.FC = () => {
                             ? <Preloader style={{marginTop: "20px"}}/>
                             : <SuperButton className={s.btn}>Sign up</SuperButton>
                         }
-
+                        <SuperButtonLink to={PATH.AUTH} className={s.link}>Sign in</SuperButtonLink>
                     </form>
                 </div>
             </AuthContainer>

@@ -16,7 +16,7 @@ export const authAPI = {
             .then(res => res.data)
     },
     registration(data:any) {
-        return instance.post('auth/register', data)
+        return instance.post<RegistrationData>('auth/register', data)
     },
     forgotPassword(email: string) {
         return instance.post<ForgotPassAPIType>(`auth/forgot`, {email, from: 'test-front-admin', message: messageRequestForPass})
@@ -31,6 +31,12 @@ type LoginAPIType = {
     "name": string
     "publicCardPacksCount": number
     "avatar"?: string
+}
+
+type RegistrationData = {
+    addedUser: {
+        name: string
+    }
 }
 
 type ForgotPassAPIType = {

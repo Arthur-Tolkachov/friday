@@ -1,0 +1,43 @@
+.alert {
+    position: fixed;
+    right: 15px;
+    bottom: 15px;
+    display: flex;
+    align-items: center;
+    background-color: #7dba76;
+    width: 400px;
+    height: 80px;
+    color: #fff;
+    padding: 15px;
+    overflow: hidden;
+    transition: all .2s ease;
+    cursor: pointer;
+}
+
+.alert.error {
+    background-color: #ba7676;
+}
+
+.alert:hover {
+    transform: scale(.98);
+}
+
+.progressbar {
+    width: 100%;
+    height: 10px;
+    background-color: rgba(0, 0, 0, .1);
+    position: absolute;
+    left: 0;
+    top: 0;
+    animation: animate linear;
+    transform-origin: left;
+}
+
+@keyframes animate {
+    0% {
+        transform: scaleX(0)
+    }
+    100% {
+        transform: scaleX(1)
+    }
+}

@@ -1,16 +1,22 @@
 import {Dispatch} from 'redux'
 import {authAPI} from '../dal/api/api'
-import {authActions} from './actions'
+import {appActions, authActions} from './actions'
 import {RegistrationDataType} from '../utils/types/registration-types'
 
 export const authThunks = {
-    setRegistrationData: (data: RegistrationDataType) => (dispatch: Dispatch) => {
+    setRegistrationData: (data: RegistrationDataType) => async (dispatch: Dispatch) => {
         dispatch(authActions.setFetching(true))
-        authAPI.registration(data).then(response => {
-            console.log(response)
-        }).finally(() => {
+        try {
+            const result = await authAPI.registration(data)
+            if (result.status === 201) {
+                dispatch(appActions.setMessageState(true, `${result.data.addedUser.name} registered successfully`, false))
+            }
+            console.log(result)
+        } catch (e) {
+            dispatch(appActions.setMessageState(true, `${e.response.data.error}`, true))
+        } finally {
             dispatch(authActions.setFetching(false))
-        })
+        }
     },
     login: (email: string, password: string, rememberMe: boolean) => async (dispatch: Dispatch) => {
         try {
