@@ -22,4 +22,16 @@ export const authThunks = {
             console.log(error)
         }
     },
+    recoverPassword: (email: string) => async (dispatch: Dispatch) => {
+        try {
+            dispatch(authActions.setFetching(true))
+            const result = await authAPI.forgotPassword(email)
+            dispatch(authActions.setMessageRecoverPass(result.info))
+        } catch (e) {
+            const error = e.response ? e.response.data.error : e.message
+            console.log(error)
+        } finally {
+            dispatch(authActions.setFetching(false))
+        }
+    }
 }
