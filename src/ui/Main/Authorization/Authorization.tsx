@@ -11,6 +11,7 @@ import {authThunks} from '../../../bll/thunks'
 import {AppStateType} from '../../../bll/store'
 import { PATH } from '../../Routes'
 import { Redirect } from 'react-router-dom'
+import SuperButtonLink from '../../common/SuperButtonLink/SuperButtonLink'
 
 type FormikErrorType = {
     email?: string
@@ -56,24 +57,27 @@ const Authorization: React.FC = () => {
     return (
         <div>
             <AuthContainer className={s.container}>
-                <Title value="Sign in" className={s.title}/>
                 <div className={s.body}>
                     <form onSubmit={formik.handleSubmit}>
                         <SuperInputText className={s.input}
                                         type="email"
                                         placeholder="email"
                                         error={formik.touched.email && formik.errors.email ? formik.errors.email : null}
-                                        {...formik.getFieldProps("email")} />
+                                        {...formik.getFieldProps('email')} />
                         <SuperInputText className={s.input}
                                         type="password"
                                         placeholder="password"
                                         error={formik.touched.password && formik.errors.password ? formik.errors.password : null}
-                                        {...formik.getFieldProps("password")} />
-                        <SuperCheckbox {...formik.getFieldProps("rememberMe")}>
+                                        {...formik.getFieldProps('password')} />
+                        <SuperCheckbox {...formik.getFieldProps('rememberMe')}>
                             Remember me
                         </SuperCheckbox>
                         <SuperButton className={s.btn} type="submit">Sign in</SuperButton>
                     </form>
+                    <div className={s.links}>
+                        <SuperButtonLink to={PATH.REG} className={s.link}>Sign up</SuperButtonLink>
+                        <SuperButtonLink to={PATH.PASSWORD_RECOVER} className={s.link}>Forgot password?</SuperButtonLink>
+                    </div>
                 </div>
             </AuthContainer>
         </div>
