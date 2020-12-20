@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Title from '../../common/Title/Title'
 import s from './Registration.module.css'
 import AuthContainer from '../../common/AuthContainer/AuthContainer'
@@ -10,9 +10,10 @@ import {useDispatch, useSelector} from 'react-redux'
 import {AppStateType} from '../../../bll/store'
 import Preloader from '../../common/Preloader/Preloader'
 import {RegistrationDataType} from '../../../utils/types/registration-types';
-import { NavLink } from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
 import SuperButtonLink from '../../common/SuperButtonLink/SuperButtonLink';
 import {PATH} from '../../Routes';
+import {authActions} from '../../../bll/actions'
 
 type FormikErrorType = {
     email?: string
@@ -23,7 +24,16 @@ type FormikErrorType = {
 
 const Registration:React.FC = () => {
     const dispatch = useDispatch()
+    const isRegistrationComplete = useSelector<AppStateType, boolean>(state => state.auth.isRegistrationComplete)
     const isFetching = useSelector<AppStateType, boolean>(state => state.auth.isFetching)
+    const history = useHistory()
+
+    useEffect(() => {
+        if(isRegistrationComplete) {
+            history.push(PATH.AUTH)
+            dispatch(authActions.setIsRegistrationComplete(false))
+        }
+    }, [dispatch, isRegistrationComplete])
 
     const formik = useFormik({
         initialValues: {
@@ -64,7 +74,7 @@ const Registration:React.FC = () => {
             }
             dispatch(authThunks.setRegistrationData(data))
         },
-    });
+    })
 
     return (
         <div className={s.wrapper}>

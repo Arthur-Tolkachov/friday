@@ -10,8 +10,8 @@ export const authThunks = {
             const result = await authAPI.registration(data)
             if (result.status === 201) {
                 dispatch(appActions.setMessageState(true, `${result.data.addedUser.name} registered successfully`, false))
+                dispatch(authActions.setIsRegistrationComplete(true))
             }
-            console.log(result)
         } catch (e) {
             dispatch(appActions.setMessageState(true, `${e.response.data.error}`, true))
         } finally {
