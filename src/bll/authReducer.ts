@@ -4,7 +4,8 @@ import {AppActionsType} from './store'
 const initialState = {
     isLoggedIn: false,
     isFetching: false,
-    messageRecoverPass: null as string | null
+    messageRecoverPass: null as string | null,
+    isRegistrationComplete: false,
 }
 
 type ActionsType = AppActionsType<typeof authActions>
@@ -20,6 +21,9 @@ const authReducer = (state = initialState, action: ActionsType): InitialStateTyp
         }
         case 'SET_MESSAGE_RECOVER_PASS': {
             return {...state, messageRecoverPass: action.message}
+        }
+        case 'SET_IS_REGISTRATION_COMPLETE': {
+            return {...state, isRegistrationComplete: action.bool}
         }
         default: return state
     }
